@@ -11,6 +11,8 @@ export const ALLOWED_FILE_TYPES = [
   "application/pdf",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   "application/msword",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "application/vnd.ms-powerpoint",
   "text/plain",
   "text/markdown",
   "application/json",
@@ -21,6 +23,8 @@ export const ALLOWED_EXTENSIONS = [
   ".pdf",
   ".doc",
   ".docx",
+  ".pptx",
+  ".ppt",
   ".txt",
   ".md",
   ".markdown",
@@ -34,6 +38,9 @@ export const FILE_TYPE_DISPLAY_NAMES: Record<string, string> = {
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
     "Word (.docx)",
   "application/msword": "Word (.doc)",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+    "PowerPoint (.pptx)",
+  "application/vnd.ms-powerpoint": "PowerPoint (.ppt)",
   "text/plain": "Text",
   "text/markdown": "Markdown",
   "application/json": "JSON",

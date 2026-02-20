@@ -68,6 +68,14 @@ export class RAGService {
         case "application/msword":
           return await this.extractWord(buffer);
 
+        case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+          return await this.extractPowerPoint(buffer);
+
+        case "application/vnd.ms-powerpoint":
+          throw new Error(
+            "Legacy .ppt format is not supported. Please save your presentation as .pptx (PowerPoint 2007+) and upload again.",
+          );
+
         case "text/plain":
         case "text/markdown":
         case "text/csv":
@@ -152,6 +160,34 @@ export class RAGService {
     } catch (error) {
       console.error("Word extraction error:", error);
       throw new Error("Failed to extract Word document content");
+    }
+  }
+
+  /**
+   * Extract text from PowerPoint presentations
+   */
+  private async extractPowerPoint(buffer: Buffer): Promise<string> {
+    try {
+      // Dynamic import to avoid build-time execution
+      const { parseOffice } = await import("officeparser");
+      const ast = await parseOffice(buffer);
+      const text = ast.toText();
+
+      // Sanitize the text to remove null bytes and other problematic characters
+      const sanitizedText = this.sanitizeText(text);
+
+      if (!sanitizedText) {
+        throw new Error(
+          "PowerPoint presentation contains no readable text content",
+        );
+      }
+
+      return sanitizedText;
+    } catch (error) {
+      console.error("PowerPoint extraction error:", error);
+      throw new Error(
+        `Failed to extract PowerPoint content: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
   }
 
