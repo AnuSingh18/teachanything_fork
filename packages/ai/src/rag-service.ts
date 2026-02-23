@@ -164,14 +164,65 @@ export class RAGService {
   }
 
   /**
-   * Extract text from PowerPoint presentations
+   * Recursively extract text from an officeparser AST node
+   */
+  private extractNodeText(node: { text?: string; children?: Array<{ text?: string; children?: any[] }> }): string {
+    if (node.text) {
+      return node.text;
+    }
+    if (node.children) {
+      return node.children
+        .map((child) => this.extractNodeText(child))
+        .filter(Boolean)
+        .join("\n");
+    }
+    return "";
+  }
+
+  /**
+   * Extract text from PowerPoint presentations with slide boundaries and speaker notes
    */
   private async extractPowerPoint(buffer: Buffer): Promise<string> {
     try {
       // Dynamic import to avoid build-time execution
       const { parseOffice } = await import("officeparser");
       const ast = await parseOffice(buffer);
-      const text = ast.toText();
+
+      // Group content by slide number
+      const slides = new Map<number, { slideText: string; notesText: string }>();
+
+      for (const node of ast.content) {
+        const slideNumber = (node.metadata as { slideNumber?: number })?.slideNumber;
+        if (slideNumber == null) continue;
+
+        if (!slides.has(slideNumber)) {
+          slides.set(slideNumber, { slideText: "", notesText: "" });
+        }
+        const entry = slides.get(slideNumber)!;
+
+        const text = this.extractNodeText(node);
+        if (!text) continue;
+
+        if (node.type === "note") {
+          entry.notesText = text;
+        } else {
+          entry.slideText = text;
+        }
+      }
+
+      // Build output ordered by slide number
+      const sortedSlides = [...slides.entries()].sort(([a], [b]) => a - b);
+      const parts: string[] = [];
+
+      for (const [slideNumber, { slideText, notesText }] of sortedSlides) {
+        let section = `--- Slide ${slideNumber} ---\n${slideText}`;
+        if (notesText) {
+          section += `\n\n[Speaker Notes]\n${notesText}`;
+        }
+        parts.push(section);
+      }
+
+      const text = parts.join("\n\n");
 
       // Sanitize the text to remove null bytes and other problematic characters
       const sanitizedText = this.sanitizeText(text);
