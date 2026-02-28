@@ -1,16 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { verifyQStashSignature } from "@/lib/qstash";
-import { env } from "@/lib/env";
+import { qstashReceiver, verifyQStashSignature } from "@/lib/qstash";
+import { env, isServiceAvailable } from "@/lib/env";
 import { logInfo, logError } from "@/lib/logger";
 import { db } from "@teachanything/db";
 import { emailDeliveries } from "@teachanything/db/schema";
 import { eq } from "drizzle-orm";
 
-const resend = new Resend(env.RESEND_API_KEY);
+const resend = isServiceAvailable("resend")
+  ? new Resend(env.RESEND_API_KEY!)
+  : null;
 
 export async function POST(req: NextRequest) {
   try {
+    // When QStash or Resend is not configured, return 503
+    if (!qstashReceiver || !resend) {
+      return NextResponse.json(
+        { error: "Email sending is not configured" },
+        { status: 503 },
+      );
+    }
+
     // Verify QStash signature
     const signature =
       req.headers.get("Upstash-Signature") ||
@@ -24,7 +34,11 @@ export async function POST(req: NextRequest) {
     // the destination URL it was given (e.g., ngrok URL), which differs from
     // req.url in local dev (localhost:3000).
     const verificationUrl = `${env.NEXT_PUBLIC_APP_URL}/api/jobs/send-email`;
-    const isValid = await verifyQStashSignature(signature, body, verificationUrl);
+    const isValid = await verifyQStashSignature(
+      signature,
+      body,
+      verificationUrl,
+    );
 
     if (!isValid) {
       logError(
@@ -81,10 +95,7 @@ export async function POST(req: NextRequest) {
           "Email validation failed, not retrying",
           { deliveryId },
         );
-        return NextResponse.json(
-          { error: error.message },
-          { status: 400 },
-        );
+        return NextResponse.json({ error: error.message }, { status: 400 });
       }
 
       // Transient errors — return 500 so QStash retries
