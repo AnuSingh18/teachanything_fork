@@ -52,6 +52,9 @@
         "ADMIN_EMAILS"
       ]
     },
+    "test": {
+      "outputs": ["coverage/**"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
@@ -77,6 +80,9 @@
     "db:studio": {
       "cache": false,
       "persistent": true
+    },
+    "db:seed": {
+      "cache": false
     }
   }
 }
