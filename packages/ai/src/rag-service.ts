@@ -144,23 +144,26 @@ export class RAGService {
    * Extract text from Word documents
    */
   private async extractWord(buffer: Buffer): Promise<string> {
+    let sanitizedText: string;
+
     try {
       // Dynamic import to avoid build-time execution
       const mammoth = await import("mammoth");
       const result = await mammoth.extractRawText({ buffer });
 
       // Sanitize the text to remove null bytes and other problematic characters
-      const sanitizedText = this.sanitizeText(result.value);
-
-      if (!sanitizedText) {
-        throw new Error("Word document contains no readable text content");
-      }
-
-      return sanitizedText;
+      sanitizedText = this.sanitizeText(result.value);
     } catch (error) {
-      console.error("Word extraction error:", error);
-      throw new Error("Failed to extract Word document content");
+      throw new Error(
+        `Failed to extract Word document content: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
+
+    if (!sanitizedText) {
+      throw new Error("Word document contains no readable text content");
+    }
+
+    return sanitizedText;
   }
 
   /**
@@ -183,6 +186,8 @@ export class RAGService {
    * Extract text from PowerPoint presentations with slide boundaries and speaker notes
    */
   private async extractPowerPoint(buffer: Buffer): Promise<string> {
+    let sanitizedText: string;
+
     try {
       // Dynamic import to avoid build-time execution
       const { parseOffice } = await import("officeparser");
@@ -225,21 +230,20 @@ export class RAGService {
       const text = parts.join("\n\n");
 
       // Sanitize the text to remove null bytes and other problematic characters
-      const sanitizedText = this.sanitizeText(text);
-
-      if (!sanitizedText) {
-        throw new Error(
-          "PowerPoint presentation contains no readable text content",
-        );
-      }
-
-      return sanitizedText;
+      sanitizedText = this.sanitizeText(text);
     } catch (error) {
-      console.error("PowerPoint extraction error:", error);
       throw new Error(
         `Failed to extract PowerPoint content: ${error instanceof Error ? error.message : String(error)}`,
       );
     }
+
+    if (!sanitizedText) {
+      throw new Error(
+        "PowerPoint presentation contains no readable text content",
+      );
+    }
+
+    return sanitizedText;
   }
 
   /**
