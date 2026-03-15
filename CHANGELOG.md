@@ -1,5 +1,52 @@
 # Changelog
 
+## [1.13.2](https://github.com/akhileshrangani4/teachanything/compare/v1.13.1...v1.13.2) (2026-03-13)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump globals from 17.0.0 to 17.4.0 ([#178](https://github.com/akhileshrangani4/teachanything/issues/178)) ([da02f76](https://github.com/akhileshrangani4/teachanything/commit/da02f766a273f50423cc383f85fcdc853633eb45))
+* **deps-dev:** bump turbo from 2.8.10 to 2.8.15 in the turbo group ([#176](https://github.com/akhileshrangani4/teachanything/issues/176)) ([784ef13](https://github.com/akhileshrangani4/teachanything/commit/784ef13e55b6ba7d5556c5f77bcedc24f5220e6b))
+* **deps:** bump @upstash/redis from 1.36.3 to 1.36.4 in the upstash group ([#171](https://github.com/akhileshrangani4/teachanything/issues/171)) ([6d3c50d](https://github.com/akhileshrangani4/teachanything/commit/6d3c50d09526b4c8801c3033145444a15729bc7c))
+* **deps:** bump marked from 17.0.1 to 17.0.4 in the markdown group ([#175](https://github.com/akhileshrangani4/teachanything/issues/175)) ([2c2531c](https://github.com/akhileshrangani4/teachanything/commit/2c2531c0e84e0d9c243d343b4402c10133e80918))
+* **deps:** bump postcss from 8.5.6 to 8.5.8 in the tailwind group across 1 directory ([#183](https://github.com/akhileshrangani4/teachanything/issues/183)) ([bc9f3d2](https://github.com/akhileshrangani4/teachanything/commit/bc9f3d2826458ad428fd797ac60c1e46df2ffbb9))
+* **deps:** bump postgres from 3.4.7 to 3.4.8 ([#186](https://github.com/akhileshrangani4/teachanything/issues/186)) ([7707de6](https://github.com/akhileshrangani4/teachanything/commit/7707de609e00eec71b8ce118018adb26d5064004))
+* **deps:** bump prettier 3.6→3.8, framer-motion, lucide-react, superjson ([#187](https://github.com/akhileshrangani4/teachanything/issues/187)) ([fdfe574](https://github.com/akhileshrangani4/teachanything/commit/fdfe574643eee8445c30373c013418dd5600fc5e))
+* **deps:** bump the langchain group with 2 updates ([#170](https://github.com/akhileshrangani4/teachanything/issues/170)) ([bc15f01](https://github.com/akhileshrangani4/teachanything/commit/bc15f0145a1eb2192640e596673e1c8f9a321da5))
+* **deps:** bump the trpc group with 4 updates ([#169](https://github.com/akhileshrangani4/teachanything/issues/169)) ([acdd661](https://github.com/akhileshrangani4/teachanything/commit/acdd661b652d5221cebf01a27b381c6970af03ad))
+* **deps:** bump tldts from 7.0.19 to 7.0.25 ([#177](https://github.com/akhileshrangani4/teachanything/issues/177)) ([de6c505](https://github.com/akhileshrangani4/teachanything/commit/de6c50582c3ec1219120cc602b110b46c1d7aed7))
+* **deps:** remove unused pino and pino-pretty ([#167](https://github.com/akhileshrangani4/teachanything/issues/167)) ([d3a907b](https://github.com/akhileshrangani4/teachanything/commit/d3a907bc4bd24562a73206f880f532d68877711e))
+* **deps:** update dependabot groups after dependency upgrades ([#185](https://github.com/akhileshrangani4/teachanything/issues/185)) ([583a2e4](https://github.com/akhileshrangani4/teachanything/commit/583a2e41786a21e7157acac7f60ec3c407c8b5f2))
+
+
+### Dependencies
+
+* **tailwind:** upgrade Tailwind CSS 3.x to 4.x and tailwind-merge 2.x to 3.x ([#182](https://github.com/akhileshrangani4/teachanything/issues/182)) ([71ffe5b](https://github.com/akhileshrangani4/teachanything/commit/71ffe5b9593184dec9af5cc5e3bead5bc1751671))
+* **zod:** upgrade Zod 3.x to 4.x and remove unused form deps ([#180](https://github.com/akhileshrangani4/teachanything/issues/180)) ([5460207](https://github.com/akhileshrangani4/teachanything/commit/5460207f5b0bc5cda7be411f4893c5005464f9bb))
+
+## [1.13.1](https://github.com/akhileshrangani4/teachanything/compare/v1.13.0...v1.13.1) (2026-03-12)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @types/react from 19.2.13 to 19.2.14 in the react group ([#143](https://github.com/akhileshrangani4/teachanything/issues/143)) ([b72430c](https://github.com/akhileshrangani4/teachanything/commit/b72430cd9f97ed854d18ce2353f705e43b1e9f1d))
+* **deps-dev:** bump drizzle-kit from 0.31.8 to 0.31.9 in the drizzle group ([#141](https://github.com/akhileshrangani4/teachanything/issues/141)) ([312a3f8](https://github.com/akhileshrangani4/teachanything/commit/312a3f8725f829ac209557130ae527a4ae49f4d2))
+* **deps-dev:** bump minimatch from 3.1.2 to 3.1.5 ([#157](https://github.com/akhileshrangani4/teachanything/issues/157)) ([73b6c88](https://github.com/akhileshrangani4/teachanything/commit/73b6c885160861f5287e55ffeee32d17c41049d5))
+* **deps:** bump @langchain/community from 1.1.15 to 1.1.18 ([#158](https://github.com/akhileshrangani4/teachanything/issues/158)) ([b448083](https://github.com/akhileshrangani4/teachanything/commit/b448083a262855b23aac0792ca753d40b1c6426b))
+* **deps:** bump @supabase/supabase-js from 2.95.2 to 2.95.3 in the supabase group ([#146](https://github.com/akhileshrangani4/teachanything/issues/146)) ([2085b83](https://github.com/akhileshrangani4/teachanything/commit/2085b83634280c7af435a5c121c0c7a82c97d5f7))
+* **deps:** bump @tanstack/react-query from 5.90.20 to 5.90.21 in the tanstack group ([#144](https://github.com/akhileshrangani4/teachanything/issues/144)) ([8addfe3](https://github.com/akhileshrangani4/teachanything/commit/8addfe32f0de67a19aa2343b261108d7869c3e6e))
+* **deps:** bump crazy-max/ghaction-github-labeler from 5.3.0 to 6.0.0 in the actions group ([#160](https://github.com/akhileshrangani4/teachanything/issues/160)) ([25d5a62](https://github.com/akhileshrangani4/teachanything/commit/25d5a62110efd5614bfc6a4428daf26c94913887))
+* **deps:** bump the ai-sdk group with 2 updates ([#142](https://github.com/akhileshrangani4/teachanything/issues/142)) ([0c4e0be](https://github.com/akhileshrangani4/teachanything/commit/0c4e0be96ea0d8cddfdaf4c8181f598ec66f840a))
+* **deps:** bump the trpc group with 4 updates ([#140](https://github.com/akhileshrangani4/teachanything/issues/140)) ([47eac06](https://github.com/akhileshrangani4/teachanything/commit/47eac0620dcda4a66c6076e6caa26ab05798df2f))
+* **deps:** bump the upstash group with 2 updates ([#145](https://github.com/akhileshrangani4/teachanything/issues/145)) ([d1d89c5](https://github.com/akhileshrangani4/teachanything/commit/d1d89c50073462d7d44025dc2c55121de0ad7aac))
+
+## [1.13.0](https://github.com/akhileshrangani4/teachanything/compare/v1.12.1...v1.13.0) (2026-03-03)
+
+
+### Features
+
+* **web:** add Hong Kong to country dropdown list ([#161](https://github.com/akhileshrangani4/teachanything/issues/161)) ([fa00ece](https://github.com/akhileshrangani4/teachanything/commit/fa00ece672957dd49435f3327329bafca8a136aa))
+
 ## [1.12.1](https://github.com/akhileshrangani4/teachanything/compare/v1.12.0...v1.12.1) (2026-02-24)
 
 

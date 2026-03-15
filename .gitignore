@@ -46,3 +46,9 @@ uploads/
 
 # playwright mcp files
 .playwright-mcp
+
+# Planning docs (local only)
+.planning/
+
+# Superset
+.superset/
