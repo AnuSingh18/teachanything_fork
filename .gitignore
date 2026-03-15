@@ -40,6 +40,10 @@ uploads/
 .DS_Store
 *.pem
 
+# IDE
+.idea/
+.claude/settings.local.json
+
 # playwright mcp files
 .playwright-mcp
 
