@@ -43,7 +43,7 @@ export const FILE_TYPE_DISPLAY_NAMES: Record<string, string> = {
     "Word (.docx)",
   "application/msword": "Word (.doc)",
   "application/vnd.openxmlformats-officedocument.presentationml.presentation":
-    "PowerPoint (.pptx)",
+    "PPTX",
   "text/plain": "Text",
   "text/markdown": "Markdown",
   "application/json": "JSON",

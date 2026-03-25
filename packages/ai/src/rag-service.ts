@@ -1,6 +1,12 @@
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import type { OpenRouterClient } from "./openrouter-client";
 
+/** Recursive node type for officeparser AST */
+interface OfficeparserNode {
+  text?: string;
+  children?: OfficeparserNode[];
+}
+
 /**
  * RAG Service for file processing, chunking, and semantic search
  */
@@ -169,7 +175,7 @@ export class RAGService {
   /**
    * Recursively extract text from an officeparser AST node
    */
-  private extractNodeText(node: { text?: string; children?: Array<{ text?: string; children?: any[] }> }): string {
+  private extractNodeText(node: OfficeparserNode): string {
     if (node.text) {
       return node.text;
     }
@@ -190,14 +196,28 @@ export class RAGService {
 
     try {
       // Dynamic import to avoid build-time execution
-      const { parseOffice } = await import("officeparser");
+      // @ts-expect-error -- officeparser has no type declarations
+      const { parseOffice } = (await import("officeparser")) as {
+        parseOffice: (buffer: Buffer) => Promise<{
+          content: Array<{
+            type: string;
+            children: OfficeparserNode[];
+            metadata: Record<string, unknown>;
+          }>;
+          toText: () => string;
+        }>;
+      };
       const ast = await parseOffice(buffer);
 
       // Group content by slide number
-      const slides = new Map<number, { slideText: string; notesText: string }>();
+      const slides = new Map<
+        number,
+        { slideText: string; notesText: string }
+      >();
 
       for (const node of ast.content) {
-        const slideNumber = (node.metadata as { slideNumber?: number })?.slideNumber;
+        const slideNumber = (node.metadata as { slideNumber?: number })
+          ?.slideNumber;
         if (slideNumber == null) continue;
 
         if (!slides.has(slideNumber)) {
