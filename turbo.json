@@ -66,7 +66,8 @@
       "persistent": true
     },
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"]
     },
     "db:generate": {
       "cache": false

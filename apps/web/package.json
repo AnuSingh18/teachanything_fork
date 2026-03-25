@@ -36,6 +36,7 @@
     "@upstash/qstash": "^2.9.0",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.36.4",
+    "@tailwindcss/postcss": "^4.2.1",
     "@vercel/analytics": "^1.6.1",
     "bcryptjs": "^3.0.3",
     "better-auth": "^1.3.27",
@@ -74,7 +75,6 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
-    "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
