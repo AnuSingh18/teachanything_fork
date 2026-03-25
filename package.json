@@ -32,10 +32,10 @@
     "turbo": "^2.8.16",
     "typescript": "5.9.2"
   },
+  "packageManager": "npm@11.4.2",
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "npm@11.4.2",
   "workspaces": [
     "apps/*",
     "packages/*"
