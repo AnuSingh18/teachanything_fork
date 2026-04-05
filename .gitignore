@@ -43,6 +43,10 @@ uploads/
 # IDE
 .idea/
 
+# Claude Code (local only)
+.claude/settings.local.json
+.claude/commands/bob.md
+
 # playwright mcp files
 .playwright-mcp
 
